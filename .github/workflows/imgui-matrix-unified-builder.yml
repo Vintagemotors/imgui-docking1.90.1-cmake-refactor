@@ -1,0 +1,91 @@
+name: CMake on multiple platforms
+
+on:
+  push:
+    branches: [ "master" ]
+  pull_request:
+    branches: [ "master" ]
+
+jobs:
+
+  build:
+    runs-on: ${{ matrix.os }}
+    strategy:
+      fail-fast: false
+      matrix:
+        os: [ubuntu-latest, windows-latest]
+        build_type: [Release]
+        c_compiler: [gcc, clang, cl]
+        include:
+          - os: windows-latest
+            c_compiler: cl
+            cpp_compiler: cl
+          - os: ubuntu-latest
+            c_compiler: gcc
+            cpp_compiler: g++
+          - os: ubuntu-latest
+            c_compiler: clang
+            cpp_compiler: clang++
+        exclude:
+          - os: windows-latest
+            c_compiler: gcc
+          - os: windows-latest
+            c_compiler: clang
+          - os: ubuntu-latest
+            c_compiler: cl
+
+    steps:
+      - name: Checkout GLFW
+        uses: actions/checkout@v4
+        with:
+          repository: glfw/glfw
+          ref: 3.3.9
+          submodules: recursive  # Fetch submodules (including GLFW)
+
+      - name: Install dependencies (only for Linux)
+        if: matrix.os == 'ubuntu-latest'
+        run: |
+          sudo apt update
+          sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev
+
+      - name: Build GLFW
+        run: cmake -B build-null-shared -D GLFW_BUILD_WAYLAND=OFF -D GLFW_BUILD_X11=OFF -D BUILD_SHARED_LIBS=ON
+      - name: Build Null shared library for GLFW
+        run: cmake --build build-null-shared --parallel
+
+      # Add similar steps for other GLFW configurations (e.g., X11, Wayland, etc.)
+
+      - name: Set reusable strings for GLFW
+        id: strings-glfw
+        run: |
+          echo "build-output-dir-glfw=${{ github.workspace }}/build-null-shared" >> "$GITHUB_OUTPUT"
+
+      - name: Print GLFW build directory contents
+        run: |
+          ls -R /home/runner/work/imgui-docking1.90.1glfw_opengl2/imgui-docking1.90.1glfw_opengl2/
+
+      # Your Project Build Steps
+      - name: Checkout Your Project
+        uses: actions/checkout@v4
+
+      - name: Set reusable strings for your project
+        id: strings
+        shell: bash
+        run: |
+          echo "build-output-dir=${{ github.workspace }}/build" >> "$GITHUB_OUTPUT"
+
+      - name: Configure CMake for your project
+        run: >
+          cmake -B ${{ steps.strings.outputs.build-output-dir }}
+          -DCMAKE_CXX_COMPILER=${{ matrix.cpp_compiler }}
+          -DCMAKE_C_COMPILER=${{ matrix.c_compiler }}
+          -DCMAKE_BUILD_TYPE=${{ matrix.build_type }}
+          -DGLFW_DIR="${{ steps.strings-glfw.outputs.build-output-dir-glfw }}"
+          -S ${{ github.workspace }}
+
+      - name: Build your project
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Test your project
+        working-directory: ${{ steps.strings.outputs.build-output-dir }}
+        run: ctest --build-config ${{ matrix.build_type }}
