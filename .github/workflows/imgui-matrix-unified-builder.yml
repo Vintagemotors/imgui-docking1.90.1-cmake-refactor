@@ -35,34 +35,14 @@ jobs:
             c_compiler: cl
 
     steps:
-      - name: Checkout GLFW
-        uses: actions/checkout@v4
-        with:
-          repository: glfw/glfw
-          ref: 3.3.9
-          submodules: recursive  # Fetch submodules (including GLFW)
+
 
       - name: Install dependencies (only for Linux)
         if: matrix.os == 'ubuntu-latest'
         run: |
           sudo apt update
-          sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev
-
-      - name: Build GLFW
-        run: cmake -B build-null-shared -D GLFW_BUILD_WAYLAND=OFF -D GLFW_BUILD_X11=OFF -D BUILD_SHARED_LIBS=ON
-      - name: Build Null shared library for GLFW
-        run: cmake --build build-null-shared --parallel
-
-      # Add similar steps for other GLFW configurations (e.g., X11, Wayland, etc.)
-
-      - name: Set reusable strings for GLFW
-        id: strings-glfw
-        run: |
-          echo "build-output-dir-glfw=${{ github.workspace }}/build-null-shared" >> "$GITHUB_OUTPUT"
-
-      - name: Print GLFW build directory contents
-        run: |
-          ls -R /home/runner/work/imgui-docking1.90.1glfw_opengl2/imgui-docking1.90.1glfw_opengl2/
+          sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev libglfw3 libglfw3-dev
+ 
 
       # Your Project Build Steps
       - name: Checkout Your Project
