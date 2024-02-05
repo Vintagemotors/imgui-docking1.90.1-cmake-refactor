@@ -1,2 +1,4 @@
-# imgui-docking1.90.1-cmake-refactor
-Full refactor - not written by me. 
+# imgui docking 1.90.1 imgui_glfw_opengl2
+I want to get imgui-docking's example implementation for opengl2 to build on Windows 
+
+Original unmodified source code: https://github.com/ocornut/imgui/tree/docking
