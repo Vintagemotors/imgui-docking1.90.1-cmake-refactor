@@ -35,9 +35,21 @@ if(UNIX AND NOT APPLE)
 
 elseif(APPLE)
     # macOS
-    find_package(glfw3 REQUIRED)
-    target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL)
-    target_compile_options(${PROJECT_NAME} PRIVATE -framework OpenGL -framework Cocoa -framework IOKit -framework CoreVideo)
+  find_library(COCOA_LIBRARY Cocoa)
+  find_library(OPENGL_LIBRARY OpenGL)
+  find_library(IOKIT_LIBRARY IOKit)
+  find_library(COREVIDEO_LIBRARY CoreVideo)
+  set(EXTRA_LIBS
+    ${COCOA_LIBRARY}
+    ${OPENGL_LIBRARY}
+    ${IOKIT_LIBRARY}
+    ${COREVIDEO_LIBRARY}
+    -lglfw3
+    gif
+    )
+include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+add_executable(${PROJECT} ${SOURCES})
+target_link_libraries(${PROJECT} ${EXTRA_LIBS})
 
 else()
     # Windows
