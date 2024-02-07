@@ -58,8 +58,22 @@ jobs:
           sudo apt update
           sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev libglfw3 libglfw3-dev
 
-
-
+      - name: Update brew (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew update
+        
+      - name: Install cmake (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew install cmake
+        
+      - name: Install glfw (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew install glfw 
+        
+      - name: Install glew (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew install glew
+        
       - name: Checkout Your Project
         uses: actions/checkout@v4
 
