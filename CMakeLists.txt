@@ -55,7 +55,6 @@ elseif(APPLE)
         PRIVATE
         glfw
         ${OPENGL_LIBRARIES}
-        ${GLEW_LIBRARIES}
         ${EXTRA_LIBS}
     )
 
