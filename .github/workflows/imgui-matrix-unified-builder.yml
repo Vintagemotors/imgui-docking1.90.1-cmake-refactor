@@ -32,6 +32,11 @@ jobs:
             cpp_compiler: clang++
             artifact_name: ${{ github.event.repository.name }}
             asset_name: example_glfw_opengl2-linux-clang-amd64
+          - os: macos-11
+            c_compiler: clang
+            cpp_compiler: clang++
+            artifact_name: ${{ github.event.repository.name }}
+            asset_name: ${{ github.event.repository.name }}-macos-amd64
 
             
         exclude:
@@ -58,8 +63,10 @@ jobs:
           yes | brew upgrade
           yes | brew install pkg-config 
           yes | brew install glfw
- 
 
+      - name: List contents of MacOS build folder 
+        if: matrix.os == 'macos-11'
+        run: ls -R ${{ github.workspace }}/build
 
       - name: Checkout Your Project
         uses: actions/checkout@v4
