@@ -21,17 +21,17 @@ jobs:
             c_compiler: cl
             cpp_compiler: cl
             artifact_name: ${{ github.event.repository.name }}.exe
-            asset_name: ${{ github.event.repository.name }}-windows-amd64.exe
+            asset_name: example_glfw_opengl2-windows-amd64.exe
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
             artifact_name: ${{ github.event.repository.name }}
-            asset_name: ${{ github.event.repository.name }}-linux-g++-amd64
+            asset_name: example_glfw_opengl2-linux-g++-amd64
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
             artifact_name: ${{ github.event.repository.name }}
-            asset_name: ${{ github.event.repository.name }}-linux-clang-amd64
+            asset_name: example_glfw_opengl2-linux-clang-amd64
 
             
         exclude:
