@@ -94,11 +94,11 @@ jobs:
 
       - name: Build your project
         run: |
-          if ($env:GITHUB_OS -eq "windows-latest" -or $env:GITHUB_OS -eq "ubuntu-latest") {
-            cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-          } else {
+          if [ "$GITHUB_OS" = "windows-latest" ] || [ "$GITHUB_OS" = "ubuntu-latest" ]; then
+           cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+          else
             cmake --build ${{ steps.strings.outputs.build-output-dir }}
-          }
+          fi
           
     #  - name: List contents of the build directory
     #    run: ls -R ${{ github.workspace }}/build
