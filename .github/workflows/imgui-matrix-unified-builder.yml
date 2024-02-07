@@ -85,7 +85,7 @@ jobs:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
           file: D:/a/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/Release/example_glfw_opengl2.exe
           asset_name: example_glfw_opengl2-windows-amd64.exe
-          tag: ${{ github.ref }}
+          tag: ${{ github.ref }}-${{ github.sha }}
 
 
 
