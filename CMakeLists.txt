@@ -30,7 +30,7 @@ target_include_directories(${PROJECT_NAME} PRIVATE
 if(UNIX AND NOT APPLE)
 
     find_package(OpenGL REQUIRED)
-    set(GLFW3_DIR ${CMAKE_CURRENT_SOURCE_DIR}/External/GLfw3/lib/cmake/glfw3)
+    set(GLFW3_DIR (${PROJECT}/External/GLfw3/lib/cmake/glfw3)
     find_package(glfw3 REQUIRED PATHS ${GLFW3_DIR})
     target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL)
     target_compile_options(${PROJECT_NAME} PRIVATE -pthread)
