@@ -51,13 +51,13 @@ elseif(APPLE)
     find_library(COREVIDEO_LIBRARY CoreVideo)
     SET(EXTRA_LIBS ${COCOA_LIBRARY} ${OpenGL_LIBRARY} ${IOKIT_LIBRARY} ${COREVIDEO_LIBRARY})
     target_link_libraries(
-        ${APP_TARGET}
+        ${PROJECT_NAME}
+        PRIVATE
         glfw
         ${OPENGL_LIBRARIES}
         ${GLEW_LIBRARIES}
         ${EXTRA_LIBS}
-)
-
+    )
 
 else()
     # Windows
