@@ -36,10 +36,9 @@ if(UNIX AND NOT APPLE)
 elseif(APPLE)
 
   find_package(OpenGL REQUIRED)
-
   include_directories(${CMAKE_CURRENT_SOURCE_DIR})
   add_executable(${PROJECT} ${SOURCES})
-  target_link_libraries(${PROJECT} PRIVATE OpenGL::GL -lglfw3 gif)
+  target_link_libraries(${PROJECT} OpenGL::GL -lglfw3 gif)
 
 else()
     # Windows
