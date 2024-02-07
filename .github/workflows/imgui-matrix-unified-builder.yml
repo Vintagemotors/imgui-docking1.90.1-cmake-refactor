@@ -58,19 +58,19 @@ jobs:
 
       - name: Update brew (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew update && yes 
+        run: brew update
   
       - name: Upgrade brew (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew upgrade && yes 
+        run: brew upgrade
 
       - name: Install pkg-config (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew install pkg-config && yes  
+        run: brew install pkg-config 
 
       - name: Install glfw (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew install glfw && yes      
+        run: brew install glfw 
        
         
         
