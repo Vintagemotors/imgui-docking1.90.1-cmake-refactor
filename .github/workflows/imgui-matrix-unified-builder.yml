@@ -82,9 +82,10 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: ${{ github.workspace }}/build/${{ matrix.asset_name }}
-          asset_name: ${{ matrix.asset_name }}
+          file: D:/a/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/Release/example_glfw_opengl2.exe
+          asset_name: example_glfw_opengl2-windows-amd64.exe
           tag: ${{ github.ref }}
+
 
 
 
