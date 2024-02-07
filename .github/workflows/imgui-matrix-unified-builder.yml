@@ -92,13 +92,17 @@ jobs:
           -DGLFW_DIR="${{ steps.strings-glfw.outputs.build-output-dir-glfw }}"
           -S ${{ github.workspace }}
 
-      - name: Build your project
-        run: |
-          if [ "$GITHUB_OS" = "windows-latest" ] || [ "$GITHUB_OS" = "ubuntu-latest" ]; then
-           cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
-          else
-            cmake --build ${{ steps.strings.outputs.build-output-dir }}
-          fi
+      - name: Build your project windows
+        if: matrix.os == 'windows-latest'
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Build your project linux
+        if: matrix.os == 'ubuntu-latest'
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Build your project MacOS
+        if: matrix.os == 'macos-11'
+        run: cmake --build ${{ steps.strings.outputs.build-output-dir }}
           
     #  - name: List contents of the build directory
     #    run: ls -R ${{ github.workspace }}/build
