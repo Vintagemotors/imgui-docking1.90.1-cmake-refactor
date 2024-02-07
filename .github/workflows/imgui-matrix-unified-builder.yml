@@ -127,7 +127,7 @@ jobs:
         uses: svenstaro/upload-release-action@v2
         with:
           repo_token: ${{ secrets.GITHUB_TOKEN }}
-          file: /home/runner/work/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/example_glfw_opengl2.so
+          file: /home/runner/work/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/example_glfw_opengl2
           asset_name: example_glfw_opengl2-linux-clang-amd64.so
           tag: ${{ github.ref }}-${{ github.sha }}
 
