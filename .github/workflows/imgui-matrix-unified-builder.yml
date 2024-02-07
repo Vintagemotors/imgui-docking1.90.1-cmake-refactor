@@ -68,11 +68,11 @@ jobs:
 
       - name: Install glfw (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew install glfw 
+        run: brew install --force glfw 
         
       - name: Install glew (MacOS)
         if: matrix.os == 'macos-11'
-        run: brew install glew
+        run: brew install --force glew
         
       - name: Checkout Your Project
         uses: actions/checkout@v4
