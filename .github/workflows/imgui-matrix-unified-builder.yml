@@ -56,9 +56,24 @@ jobs:
           sudo apt update
           sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev libglfw3 libglfw3-dev
 
-      - name: Install MacOS dependencies 
+      - name: Update brew (MacOS)
         if: matrix.os == 'macos-11'
-        run: export HOMEBREW_NO_INSTALL_CLEANUP=true && yes | brew update && yes | brew upgrade && yes | brew install pkg-config && yes | brew install glfw && yes
+        run: brew update && yes 
+  
+      - name: Upgrade brew (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew upgrade && yes 
+
+      - name: Install pkg-config (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew install pkg-config && yes  
+
+      - name: Install glfw (MacOS)
+        if: matrix.os == 'macos-11'
+        run: brew install glfw && yes      
+       
+        
+        
 
       - name: List contents of MacOS build folder 
         if: matrix.os == 'macos-11'
