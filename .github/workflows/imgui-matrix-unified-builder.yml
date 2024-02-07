@@ -58,9 +58,9 @@ jobs:
           sudo apt update
           sudo apt install libxrandr-dev libxinerama-dev libxcursor-dev libxi-dev libxext-dev libwayland-dev libxkbcommon-dev libglfw3 libglfw3-dev
 
-      - name: Update brew (MacOS)
-        if: matrix.os == 'macos-11'
-        run: brew update
+#      - name: Update brew (MacOS)
+#        if: matrix.os == 'macos-11'
+#        run: brew update
         
 #      - name: Force cmake version (MacOS)
 #        if: matrix.os == 'macos-11'
