@@ -35,9 +35,18 @@ if(UNIX AND NOT APPLE)
 
 elseif(APPLE)
 
+  find_library(OPENGL_LIBRARY OpenGL)
+
+  # Instead of finding glfw3 library, use the -lglfw3 flag
+  set(EXTRA_LIBS
+    ${OPENGL_LIBRARY}
+    -lglfw3
+    gif
+  )
+
   include_directories(${CMAKE_CURRENT_SOURCE_DIR})
   add_executable(${PROJECT} ${SOURCES})
-  target_link_libraries(${PROJECT} -lglfw3 gif)
+  target_link_libraries(${PROJECT} ${EXTRA_LIBS})
 
 else()
     # Windows
