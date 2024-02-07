@@ -20,15 +20,23 @@ jobs:
           - os: windows-latest
             c_compiler: cl
             cpp_compiler: cl
+            artifact_name: ${{ github.event.repository.name }}.exe
+            asset_name: ${{ github.event.repository.name }}-windows-amd64.exe
           - os: ubuntu-latest
             c_compiler: gcc
             cpp_compiler: g++
+            artifact_name: ${{ github.event.repository.name }}
+            asset_name: ${{ github.event.repository.name }}-linux-g++-amd64
           - os: ubuntu-latest
             c_compiler: clang
             cpp_compiler: clang++
-          - os: macos-11
-            c_compiler: clang
-            cpp_compiler: clang++
+            artifact_name: ${{ github.event.repository.name }}
+            asset_name: ${{ github.event.repository.name }}-linux-clang-amd64
+  #        - os: macos-11
+  #          c_compiler: clang
+  #         cpp_compiler: clang++
+  #         artifact_name: ${{ github.event.repository.name }}
+  #         asset_name: ${{ github.event.repository.name }}-macos-amd64
             
         exclude:
           - os: windows-latest
@@ -69,6 +77,14 @@ jobs:
 
       - name: Build your project
         run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
+
+      - name: Upload binaries to release
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: target/release/${{ matrix.artifact_name }}
+          asset_name: ${{ matrix.asset_name }}
+          tag: ${{ github.ref }}
 
 
 
