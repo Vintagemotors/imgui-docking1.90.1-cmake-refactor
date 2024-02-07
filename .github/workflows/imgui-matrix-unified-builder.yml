@@ -58,13 +58,7 @@ jobs:
 
       - name: Install MacOS dependencies 
         if: matrix.os == 'macos-11'
-        run: |
-          export HOMEBREW_NO_INSTALL_CLEANUP=true
-          
-          yes | brew update 
-          yes | brew upgrade
-          yes | brew install pkg-config 
-          yes | brew install glfw
+        run: export HOMEBREW_NO_INSTALL_CLEANUP=true && yes | brew update && yes | brew upgrade && yes | brew install pkg-config && yes | brew install glfw && yes
 
       - name: List contents of MacOS build folder 
         if: matrix.os == 'macos-11'
