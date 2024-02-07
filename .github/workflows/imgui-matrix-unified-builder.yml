@@ -60,7 +60,7 @@ jobs:
           yes | brew install glfw
  
 
-      # Your Project Build Steps
+
       - name: Checkout Your Project
         uses: actions/checkout@v4
 
