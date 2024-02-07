@@ -36,10 +36,27 @@ if(UNIX AND NOT APPLE)
 
 elseif(APPLE)
 
-  find_package(OpenGL REQUIRED)
-  include_directories(${CMAKE_CURRENT_SOURCE_DIR}/External/GLfw3/include)
-  add_executable(${PROJECT} ${SOURCES})
-  target_link_libraries(${PROJECT} PRIVATE OpenGL::GL ${CMAKE_CURRENT_SOURCE_DIR}/External/GLfw3/lib/libglfw3.a gif)
+    find_package(glfw3 REQUIRED)
+    include_directories(${GLFW_INCLUDE_DIRS})
+    link_libraries(${GLFW_LIBRARY_DIRS})
+
+    find_package(OpenGL REQUIRED)
+    include_directories(${OPENGL_INCLUDE_DIRS})
+
+    find_package(GLEW REQUIRED)
+    include_directories(${GLEW_INCLUDE_DIRS})
+    find_library(COCOA_LIBRARY Cocoa)
+    find_library(OpenGL_LIBRARY OpenGL)
+    find_library(IOKIT_LIBRARY IOKit)
+    find_library(COREVIDEO_LIBRARY CoreVideo)
+    SET(EXTRA_LIBS ${COCOA_LIBRARY} ${OpenGL_LIBRARY} ${IOKIT_LIBRARY} ${COREVIDEO_LIBRARY})
+    target_link_libraries(
+        ${APP_TARGET}
+        glfw
+        ${OPENGL_LIBRARIES}
+        ${GLEW_LIBRARIES}
+        ${EXTRA_LIBS}
+)
 
 
 else()
