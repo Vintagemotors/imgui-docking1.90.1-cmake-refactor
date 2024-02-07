@@ -35,21 +35,11 @@ if(UNIX AND NOT APPLE)
 
 elseif(APPLE)
 
-  find_library(COCOA_LIBRARY Cocoa)
   find_library(OPENGL_LIBRARY OpenGL)
-  find_library(IOKIT_LIBRARY IOKit)
-  find_library(COREVIDEO_LIBRARY CoreVideo)
-  set(EXTRA_LIBS
-    ${COCOA_LIBRARY}
-    ${OPENGL_LIBRARY}
-    ${IOKIT_LIBRARY}
-    ${COREVIDEO_LIBRARY}
-    -lglfw3
-    gif
-    )
-include_directories(${CMAKE_CURRENT_SOURCE_DIR})
-add_executable(${PROJECT} ${SOURCES})
-target_link_libraries(${PROJECT} ${EXTRA_LIBS})
+
+  include_directories(${CMAKE_CURRENT_SOURCE_DIR})
+  add_executable(${PROJECT} ${SOURCES})
+  target_link_libraries(${PROJECT} ${OPENGL_LIBRARY} -lglfw3 gif)
 
 else()
     # Windows
