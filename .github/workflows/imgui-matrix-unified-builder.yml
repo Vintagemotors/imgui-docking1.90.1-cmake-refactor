@@ -87,6 +87,22 @@ jobs:
           asset_name: example_glfw_opengl2-windows-amd64.exe
           tag: ${{ github.ref }}-${{ github.sha }}
 
+      - name: Upload binaries to release (Linux - GCC)
+        if: matrix.os == 'ubuntu-latest' && matrix.c_compiler == 'gcc'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /home/runner/work/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/example_glfw_opengl2
+          asset_name: example_glfw_opengl2-linux-g++-amd64
+          tag: ${{ github.ref }}-${{ github.sha }}
 
+      - name: Upload binaries to release (Linux - Clang)
+        if: matrix.os == 'ubuntu-latest' && matrix.c_compiler == 'clang'
+        uses: svenstaro/upload-release-action@v2
+        with:
+          repo_token: ${{ secrets.GITHUB_TOKEN }}
+          file: /home/runner/work/imgui-docking1.90.1-cmake-refactor/imgui-docking1.90.1-cmake-refactor/build/example_glfw_opengl2
+          asset_name: example_glfw_opengl2-linux-clang-amd64
+          tag: ${{ github.ref }}-${{ github.sha }}
 
 
