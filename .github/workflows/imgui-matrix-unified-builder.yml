@@ -81,8 +81,8 @@ jobs:
       - name: Build your project
         run: cmake --build ${{ steps.strings.outputs.build-output-dir }} --config ${{ matrix.build_type }}
 
-      - name: List contents of the build directory
-        run: ls -R ${{ github.workspace }}/build
+    #  - name: List contents of the build directory
+    #    run: ls -R ${{ github.workspace }}/build
 
         
       - name: Upload Windows x64 binaries to release
