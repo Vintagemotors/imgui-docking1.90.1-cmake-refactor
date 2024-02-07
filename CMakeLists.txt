@@ -31,8 +31,8 @@ if(UNIX AND NOT APPLE)
 
     find_package(glfw3 REQUIRED)
     find_package(OpenGL REQUIRED)
-    target_link_libraries(${PROJECT} PRIVATE OpenGL::GL ${CMAKE_CURRENT_SOURCE_DIR}/External/GLfw3/lib/libglfw3.a)
-    target_link_libraries(${PROJECT} PRIVATE gif)
+    target_link_libraries(${PROJECT_NAME} PRIVATE glfw OpenGL::GL)
+    target_compile_options(${PROJECT_NAME} PRIVATE -pthread)
 
 elseif(APPLE)
 
