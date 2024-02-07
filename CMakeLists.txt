@@ -34,7 +34,7 @@ if(UNIX AND NOT APPLE)
     target_compile_options(${PROJECT_NAME} PRIVATE -pthread)
 
 elseif(APPLE)
-    # macOS
+
   find_library(COCOA_LIBRARY Cocoa)
   find_library(OPENGL_LIBRARY OpenGL)
   find_library(IOKIT_LIBRARY IOKit)
