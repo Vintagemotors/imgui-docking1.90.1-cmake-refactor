@@ -1,6 +1,6 @@
 ## imgui docking 1.90.1 imgui_glfw_opengl2 multi platform compiler configuration 
 
-I want to get imgui-docking's example implementation for opengl2 to upload and run on MacOS - MacOS now builds! Windows now runs, Linux now builds (but doesn't run).
+the CMakelists.txt works on local builds for Linux, MacOS, and Windows. The Windows build works via GitHub actions. The others do not. 
 
 MacOS CMakelists.txt reference: https://gist.github.com/nebgnahz/b10dc964b7541f125696a2ea79350333  (completely useless don't use this)  
 
