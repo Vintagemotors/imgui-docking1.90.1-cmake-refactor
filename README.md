@@ -7,3 +7,5 @@ MacOS CMakelists.txt reference: https://gist.github.com/nebgnahz/b10dc964b7541f1
 MacOS CMakelists.txt reference: https://github.com/morizotter/imgui-opengl-glfw-glew-cmake-demo  (helped somewhat)  
 
 Original unmodified source code: https://github.com/ocornut/imgui/tree/docking
+
+File dialog reference implementation: https://github.com/aiekick/ImGuiFileDialog
