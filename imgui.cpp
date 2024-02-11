@@ -1284,7 +1284,7 @@ ImGuiIO::ImGuiIO()
     Fonts = NULL;
     FontGlobalScale = 1.0f;
     FontDefault = NULL;
-    FontAllowUserScaling = false;
+    FontAllowUserScaling = true;
     DisplayFramebufferScale = ImVec2(1.0f, 1.0f);
 
     MouseDoubleClickTime = 0.30f;
